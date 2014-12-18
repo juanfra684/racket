@@ -175,7 +175,11 @@
 #  define ASM_DBLPREC_CONTROL_87
 # endif
 # if defined(powerpc)
-#  define SCHEME_PLATFORM_LIBRARY_SUBPATH "ppc-"SPLS_LINUX
+#  if defined(__powerpc64__)
+#   define SCHEME_PLATFORM_LIBRARY_SUBPATH "ppc64-"SPLS_LINUX
+#  else
+#   define SCHEME_PLATFORM_LIBRARY_SUBPATH "ppc-"SPLS_LINUX
+#  endif
 # endif
 # if defined(__mc68000__)
 #  define SCHEME_PLATFORM_LIBRARY_SUBPATH "m68k-"SPLS_LINUX
@@ -248,7 +252,7 @@
 # define MZ_JIT_USE_MPROTECT
 # define MZ_USE_DWARF_LIBUNWIND
 #endif
-#if defined(powerpc)
+#if defined(powerpc) && !defined(__powerpc64__)
 # define MZ_USE_JIT_PPC
 #endif
 # if defined(__arm__)
